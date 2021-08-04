@@ -14,3 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'ReactionController@index');
+Route::post('/reactions', 'ReactionController@store');
+Route::inertia('/upload', 'Reactions/Upload');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Reaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ReactionController extends Controller
@@ -17,5 +19,18 @@ class ReactionController extends Controller
         return Inertia::render('Reactions/Index', [
             'reactions' => $reactions,
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $url = $request->file('image')->storePublicly('reactions', 's3');
+        
+        $reaction = Reaction::create([
+            'name' => $request->input('name'),
+            'url' => env('AWS_BUCKET', '') . '.s3.' . env('AWS_DEFAULT_REGION')
+                        . '.amazonaws.com/' . $url,
+        ]);
+
+        return Redirect::to('/')->with((['message' => 'success']));
     }
 }
