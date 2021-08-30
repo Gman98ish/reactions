@@ -23,7 +23,7 @@ const copyToClipboard = reaction => async () => {
 
 const Reaction = reaction => <div className="p-3 m-3 cursor-pointer hover:bg-yellow-100" key={reaction.id} onClick={copyToClipboard(reaction)}>
     <div className="text-center w-full">
-        <img src={"https://" + reaction.url} alt="" className="mx-auto" style={{maxWidth: 200, minWidth: 100}} />
+        <img src={"https://" + reaction.url} alt="" loading="lazy" className="mx-auto" style={{maxWidth: 200, minWidth: 100}} />
     </div>
     {reaction.name}
 </div>
