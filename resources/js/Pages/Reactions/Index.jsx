@@ -37,12 +37,11 @@ const SearchBar = () => <form method="GET" action="/">
 </form>
 
 export default function Index({ reactions }) {
-    console.log(reactions)
     return (
         <div>
             <SearchBar />
             <div className="grid justify-items-center grid-cols-1 md:grid-cols-5 ">
-                {reactions.map(Reaction)}
+                {[...reactions].reverse().map(Reaction)}
             </div>
         </div>
     )
